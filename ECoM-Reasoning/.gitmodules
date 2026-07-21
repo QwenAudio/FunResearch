@@ -1,0 +1,6 @@
+[submodule "SLAM-LLM"]
+	path = SLAM-LLM
+	url = https://github.com/the-bird-F/SLAM-CoM.git
+[submodule "third_party/LLMLingua"]
+	path = third_party/LLMLingua
+	url = https://github.com/microsoft/LLMLingua.git

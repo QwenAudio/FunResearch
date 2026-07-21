@@ -1,0 +1,5 @@
+# Model weights are stored here but never committed to git.
+# Ignore everything in this directory except the two tracked files below.
+*
+!.gitignore
+!README.md

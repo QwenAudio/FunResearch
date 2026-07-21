@@ -1,0 +1,11 @@
+# Validation manifest (math QA) for the ECoM model.
+
+datasets:
+- name: mathqa
+  dataset_path: /path/to/Math-Dataset/merged_test_token.jsonl
+  data_struct: sats-reason
+  sampling_rate: 1.0
+  compress:
+    stage: null
+    rate: 1.0
+  system_prompt: Conduct a spoken conversation with the user.

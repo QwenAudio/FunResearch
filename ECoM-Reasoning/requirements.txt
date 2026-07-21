@@ -1,0 +1,23 @@
+# Most core deps are installed transitively by `pip install -e SLAM-LLM`.
+# The packages below are listed for reference and to cover the ECoM-specific extras.
+
+# --- Deep learning core ---
+torch
+transformers>=4.45          # newer Cache API; required by the patched LLMLingua (see patches/)
+peft
+hydra-core
+omegaconf
+numpy
+tqdm
+pyyaml
+
+# --- Audio / speech front-end ---
+openai-whisper
+librosa
+soundfile
+torchaudio
+
+# --- Data construction (prompt compression) ---
+# Install the patched fork instead of PyPI llmlingua:
+#   git apply patches/llmlingua-dynamiccache.patch   (inside third_party/LLMLingua)
+#   pip install -e third_party/LLMLingua

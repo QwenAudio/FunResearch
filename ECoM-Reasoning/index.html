@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECoM Reasoning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2a4a5e;
+      --primary-light: #eef2f5;
+      --primary-dark: #1a3040;
+      --accent: #4a6a85;
+      --accent-light: #e5eef4;
+      --success: #3d7565;
+      --warning: #8a6a3a;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #2d3748;
+      --text-secondary: #4a5a6a;
+      --border: #d0d8e0;
+      --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.08);
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero ─────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, #1a2e3e 0%, #2a4a5e 45%, #3a5a72 100%);
+      color: #fff;
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .hero h1 span { color: #a8c4d8; }
+    .hero .subtitle {
+      font-size: 1.25rem;
+      font-weight: 400;
+      opacity: .9;
+      max-width: 780px;
+      margin: 0 auto 24px;
+      background: rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    .hero .authors {
+      font-size: 1.05rem;
+      opacity: .85;
+      margin-bottom: 32px;
+    }
+    .btn-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-size: .95rem; font-weight: 600;
+      text-decoration: none;
+      transition: all .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+    .btn-paper { background: #fff; color: var(--primary); }
+    .btn-code  { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(4px); }
+
+    /* ── Layout ───────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 64px 0; }
+    .section-title {
+      font-size: 1.75rem; font-weight: 700;
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+      color: var(--primary);
+    }
+    .section-title i { font-size: 1.5rem; color: var(--accent); }
+
+    /* ── Cards ────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #3a5a70 100%);
+      color: #fff;
+      padding: 18px 28px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header i { opacity: 0.9; }
+    .card-body { padding: 28px; }
+
+    /* ── Overview Card (unified abstract, figure, toc) ─────────────────────────────── */
+    .overview-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .overview-card-body { padding: 32px; }
+
+    /* ── Abstract ─────────────────────────────── */
+    .abstract-section {
+      margin-bottom: 36px;
+    }
+    .abstract-section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+    .abstract-section h2 i { color: var(--accent); }
+    .abstract-text {
+      border-left: 4px solid var(--accent);
+      padding: 20px 24px;
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .abstract-text strong { color: var(--text); }
+
+    /* ── Figure Section ───────────────────────────────── */
+    .figure-section {
+      margin-bottom: 36px;
+    }
+    .figure-section figure {
+      text-align: center;
+    }
+    .figure-section img {
+      max-width: 75%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 0px solid var(--border);
+    }
+    .figure-section figcaption {
+      margin-top: 16px;
+      font-size: .95rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* ── Table of Contents ────────────────────── */
+    .toc-section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toc-section h3 i { color: var(--accent); }
+    .toc {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--primary-light);
+      color: var(--primary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: .95rem;
+      transition: all .2s ease;
+      border: 1px solid transparent;
+    }
+    .toc a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── Audio Example Cards ──────────────────── */
+    .example-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .example-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #3a5a70 100%);
+      color: #fff;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .example-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .example-body { padding: 28px; }
+
+    .question-box {
+      background: linear-gradient(135deg, #f5f0e8 0%, #f8f5f0 100%);
+      border-left: 4px solid var(--warning);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .question-box .label {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--warning);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .question-box .text {
+      font-family: 'Roboto Mono', monospace;
+      font-size: .95rem;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .question-box audio { width: 100%; max-width: 400px; height: 40px; }
+
+    .ground-truth {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #e8f0ec 0%, #dceae4 100%);
+      border: 1px solid var(--success);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--success);
+      margin-bottom: 24px;
+    }
+    .ground-truth i { font-size: 1.1rem; }
+
+    .responses-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .responses-row {
+      display: grid;
+      gap: 20px;
+    }
+    .responses-row-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .responses-row-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .response-card {
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: all .2s ease;
+    }
+    .response-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .response-card .model-name {
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .response-card .transcript {
+      font-size: .85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-height: 120px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .response-card audio { width: 100%; height: 36px; }
+    .no-audio {
+      font-size: .8rem;
+      color: #9ca3af;
+      font-style: italic;
+      padding: 8px 0;
+    }
+
+    /* ── Compression Examples ─────────────────── */
+    .compression-example {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .compression-header {
+      background: linear-gradient(135deg, #3a5a70 0%, #4a6a82 100%);
+      color: #fff;
+      padding: 20px 28px;
+    }
+    .compression-header h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compression-body { padding: 28px; }
+
+    .compression-question {
+      background: #f5f7f9;
+      border-left: 4px solid #3a5a70;
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+    }
+    .compression-question .label {
+      font-size: .8rem;
+      font-weight: 700;
+      color: #3a5a70;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .compression-question .text {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .compression-answer {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8f0ec;
+      border: 1px solid var(--success);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--success);
+      margin-bottom: 24px;
+      font-size: .9rem;
+    }
+
+    .compression-levels {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .compression-level {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .level-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .level-badge {
+      font-size: .85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #3a5a70;
+      color: #fff;
+    }
+
+    .level-bar {
+      width: 100%;
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .level-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .3s ease;
+      background: #3a5a70;
+    }
+    .level-100 .level-bar-fill { width: 100%; }
+    .level-80 .level-bar-fill { width: 80%; }
+    .level-60 .level-bar-fill { width: 60%; }
+    .level-40 .level-bar-fill { width: 40%; }
+    .level-20 .level-bar-fill { width: 20%; }
+
+    .level-text {
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.7;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .level-text .highlight { background: #fce9b8; padding: 1px 4px; border-radius: 3px; }
+    .level-text .dimmed { color: #9ca3af; }
+    .transcript .repeated { color: #9ca3af; }
+
+    /* ── Divider ──────────────────────────────── */
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, #4a6a80 100%);
+      border-radius: 2px;
+      margin: 48px 0;
+      opacity: 0.6;
+    }
+
+    /* ── Footer ───────────────────────────────── */
+    footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 40px 24px;
+      font-size: .9rem;
+    }
+    footer a { color: #a8c4d8; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero .subtitle { font-size: 1rem; padding: 10px 16px; }
+      .section-title { font-size: 1.4rem; }
+      .responses-row-2,
+      .responses-row-3 { grid-template-columns: 1fr; }
+      .compression-level { grid-template-columns: 1fr; }
+      .level-indicator { flex-direction: row; justify-content: flex-start; }
+      .level-bar { width: 100px; }
+      .toc { flex-direction: column; }
+      .toc a { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ Hero ════════════════ -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>Efficient Chain-of-Modality Reasoning via Progressive Compression<br/> for <span>Spoken Language Models</span></h1>
+    <p class="subtitle">
+      <i class="fas fa-bolt"></i> The implementation will be open-sourced after publication.
+    </p>
+    <p class="authors">
+      <i class="fas fa-users"></i> Pengchao Feng, Chao-Hong Tan, Qian Chen, Wen Wang, Xiangang Li, Xie Chen
+    </p>
+    <div class="btn-group">
+      <a class="btn btn-paper" href="#"><i class="fas fa-file-pdf"></i> Paper (Coming Soon)</a>
+      <a class="btn btn-code" href="#"><i class="fab fa-github"></i> Code (Coming Soon)</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ════════════════ Overview (Abstract + Figure + TOC unified) ════════════════ -->
+  <section id="abstract">
+    <div class="container">
+      <div class="overview-card">
+        <div class="overview-card-body">
+          <!-- Table of Contents -->
+          <div class="toc-section">
+            <h3><i class="fas fa-list"></i> Case Studies </h3>
+            <div class="toc">
+              <a href="#examples-compression"><i class="fas fa-compress-alt"></i> Token-Level Compression</a>
+              <a href="#examples-responses"><i class="fas fa-flask"></i> Different Framework Responses</a>
+              <a href="#examples-ratio"><i class="fas fa-flask"></i> Different Compression Ratios</a>
+            </div>
+          </div>
+          
+          <br><br>
+          
+          <!-- Figure -->
+          <div class="figure-section">
+            <figure>
+              <p align="center">
+                <img src="./docs/images/ECoM_Reasoning_Framework.png" alt="ECoM Reasoning Framework" style="max-width:85%; height:auto;" />
+              </p>
+              <figcaption><strong>Figure:</strong> Overview of the ECoM Reasoning Framework with Progressive Compression strategy.</figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ════════════════ Token-Level Compression Examples ════════════════ -->
+  <section id="examples-compression">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-compress-alt"></i> Examples of Token-Level Compression</h2>
+      <!-- <p style="color: var(--text-secondary); margin-bottom: 32px;">
+        Visualize how progressive compression reduces text tokens while preserving essential reasoning structure. The compression ratio indicates the percentage of original tokens retained.
+      </p> -->
+
+      <!-- Example 1 -->
+      <div class="compression-example">
+        <div class="compression-header">
+          <h3><i class="fas fa-cogs"></i> Example 1</h3>
+        </div>
+        <div class="compression-body">
+          <div class="compression-question">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">
+              a and b can do a piece of work in 4 days. With the help of c they finish the work in 3 days. c alone can do that piece of work in ?
+            </div>
+          </div>
+
+          <div class="compression-answer">
+            <i class="fas fa-check"></i> Answer: <strong>12 days</strong>
+          </div>
+
+          <div class="compression-levels">
+            <div class="compression-level">
+              <div class="level-indicator level-100">
+                <span class="level-badge">100%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                c = 1 / 3 – 1 / 4 = <span class="highlight">1 / 12</span> = > <span class="highlight">12 days</span> answer : d
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-80">
+                <span class="level-badge">80%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                c = 1 / 3 – 1 / 4 = 1 12 <span class="highlight">12 days</span> answer d
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-60">
+                <span class="level-badge">60%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                = 1 / 3 – 1 4 12 <span class="highlight">12 days</span> answer d
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-40">
+                <span class="level-badge">40%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                1 3 1 4 12 <span class="highlight">12 days</span> answer
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-20">
+                <span class="level-badge">20%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                3 4 <span class="highlight">12 days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 2 -->
+      <div class="compression-example">
+        <div class="compression-header">
+          <h3><i class="fas fa-dumbbell"></i> Example 2</h3>
+        </div>
+        <div class="compression-body">
+          <div class="compression-question">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">
+              Bobby can deadlift 300 pounds at 13. When he is 18 he can deadlift 100 pounds more than 250% of his previous deadlift. How many pounds did he add per year?
+            </div>
+          </div>
+
+          <div class="compression-answer">
+            <i class="fas fa-check"></i> Answer: <strong>110</strong>
+          </div>
+
+          <div class="compression-levels">
+            <div class="compression-level">
+              <div class="level-indicator level-100">
+                <span class="level-badge">100%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                His new deadlift is <span class="highlight">300*2.5+100=850</span> pounds.
+                So he added 850-300=550 pounds to his deadlift.
+                This took 18-13=5 years.
+                So he added <span class="highlight">550/5=110</span> pounds per year.
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-80">
+                <span class="level-badge">80%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                new deadlift is <span class="highlight">300*2.5+100=850</span> pounds added 850-300=550 pounds to deadlift took 18-13=5 years added <span class="highlight">550/5=110</span> pounds per year
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-60">
+                <span class="level-badge">60%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                deadlift <span class="highlight">300*2.5+100=850</span> pounds added 850-300=550 pounds 18-13=5 years added <span class="highlight">550/5=110</span> pounds
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-40">
+                <span class="level-badge">40%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                deadlift <span class="highlight">300*2.5+100=850</span> added 18-13=5 years <span class="highlight">550/5=110</span> pounds
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-20">
+                <span class="level-badge">20%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                300+100 <span class="highlight">550/5=110</span> pounds
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 3 -->
+      <div class="compression-example">
+        <div class="compression-header">
+          <h3><i class="fas fa-graduation-cap"></i> Example 3</h3>
+        </div>
+        <div class="compression-body">
+          <div class="compression-question">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">
+              <strong>Problem 3.</strong> Vasya solved problems for 15 days - at least one problem each day. Each day (except the first), if the weather was cloudy, he solved one more problem than the previous day, and if it was sunny, one less problem. In the first 9 days, Vasya solved 13 problems.<br><br>
+              a) What was the weather like on the 10th day? How many problems did he solve on that day? [4 points]<br>
+              b) What is the maximum number of problems Vasya could solve on the 15th day? [2 points] (B. Frenkin)
+            </div>
+          </div>
+
+          <div class="compression-answer">
+            <i class="fas fa-check"></i> Answer: <strong>7</strong>
+          </div>
+
+          <div class="compression-levels">
+            <div class="compression-level">
+              <div class="level-indicator level-100">
+                <span class="level-badge">100%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                <strong>Answer.</strong> a) The 10th day was cloudy, Vasya solved 2 problems; b) 7 problems.
+                <strong>Solution.</strong> a) See the solution to problem 2 for 6th grade (p. 4).
+                b) Since on the 10th day Vasya solved 2 problems (see part a), and in each subsequent day he can solve a maximum of 1 more problem, then in 5 days he can solve a maximum of <span class="highlight">$2+5=7$</span> problems. This will happen if the weather was cloudy from the 11th to the 15th day.
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-80">
+                <span class="level-badge">80%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                <strong>Answer.</strong> a) 10th day cloudy Vasya solved 2 problems; b) 7 problems. <strong>Solution.</strong> a) See solution to problem 2 for 6th grade (p. 4). b) Since 10th day Vasya solved 2 problems (see part a), each subsequent day can solve maximum 1 more problem, in 5 days can solve maximum <span class="highlight">$2+5=7$</span> problems This happen if weather cloudy from 11th to 15th day.
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-60">
+                <span class="level-badge">60%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                Answer 10th day cloudy Vasya solved 2 problems 7 problems. Solution See solution problem 2 6th grade (p. 4) 10th day Vasya solved 2 problems part each subsequent day solve maximum 1 more problem 5 days solve maximum <span class="highlight">$2+5=7$</span> problems if weather cloudy 11th to 15th day.
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-40">
+                <span class="level-badge">40%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                10th day cloudy Vasya solved 2 7 problems problem 2 6th grade. 4) 10th day Vasya solved 2 problems 1 5 days <span class="highlight">$2+5=7$</span> problems weather cloudy 11th to 15th
+              </div>
+            </div>
+
+            <div class="compression-level">
+              <div class="level-indicator level-20">
+                <span class="level-badge">20%</span>
+                <div class="level-bar"><div class="level-bar-fill"></div></div>
+              </div>
+              <div class="level-text">
+                10th cloudy Vasya 2 7 6th grade Vasya 5 <span class="highlight">$2+5=7</span> cloudy 11th 15th
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- ════════════════ Main Experiment Cases ════════════════ -->
+  <section id="examples-responses">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-flask"></i> Cases of Different Framework Response</h2>
+
+      <!-- Case 1: Single -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-shopping-cart"></i> Case 1: Addition Problem</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">Jessica spent $10.22 on a cat toy, and a cage cost her $11.73. What was the total cost of Jessica's purchases?</div>
+            <audio controls><source src="./docs/audios/single103/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>21.95</strong>
+          </div>
+
+          <div class="responses-grid">
+            <div class="responses-row responses-row-3">
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-robot"></i> CoM</div>
+                <div class="transcript"><span class="repeated">Jessica spent $10.22 on a cat toy and a cage cost her $11.73 what was the total cost of Jessica's purchases?</span> To find the total cost of Jessica's purchases, you need to add the cost of the cat toy and the cost of the cage. Cost of cat toy: $10.22. Cost of cage: $11.73. Total cost = $10.22 + $11.73 = $22.00. So, the total cost of Jessica's purchases is $22.00.</div>
+                <audio controls><source src="./docs/audios/single103/com.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-brain"></i> CoM Reasoning</div>
+                <div class="transcript"><span class="repeated">Jessica spent $10.22 on a cat toy and a cage for her gecko. The cage cost her $11.73. What was the total cost of Jessica's purchases?</span> <strong>To determine the total cost of Jessica's purchases, we need to add the cost of the cat toy and the cage together. Let's break it down step by step: 1. Identify the cost of the cat toy: $10.22. 2. Identify the cost of the cage: $11.73. Now, we add these two amounts together: 10.22 + 11.73. To make the addition easier, we can align the decimal points. Starting from the rightmost digit (the hundredths place), we add the digits in each column: In the hundredths place: 2 + 3 = 5. In the tenths place: 2 + 7 = 9. In the dollars place: 1 + 1 = 2. Putting it all together, we get: 21.95. Therefore, the total cost of Jessica's purchases is 21.95.</strong> The answer is 21.95. </div>
+                <audio controls><source src="./docs/audios/single103/comthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning</div>
+                <div class="transcript"><strong>cat toy $10.22 cage $11.73 $21.95.</strong> The answer is 21.95.</div>
+                <audio controls><source src="./docs/audios/single103/ecomthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 2: SVAMP -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-mountain"></i> Case 2: Distance Problem</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">If the cave is 919 feet deep and they need to travel 1307 feet. How far is the end of the cave?</div>
+            <audio controls><source src="./docs/audios/svamp217/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>2226</strong>
+          </div>
+
+          <div class="responses-grid">
+            <div class="responses-row responses-row-3">
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-robot"></i> CoM</div>
+                <div class="transcript"><span class="repeated">If the cave is 919 feet deep and they need to travel 1307 feet how far is the end of the cave?</span> To find the distance from the end of the cave to the starting point, we need to subtract the depth of the cave from the total distance they need to travel. Distance to travel: 1307 feet. Depth of cave: 919 feet. Distance from end of cave to starting point = Distance to travel - Depth of cave = 1307 - 919 = 388 feet. So, the end of the cave is 388 feet away from the starting point.</div>
+                <audio controls><source src="./docs/audios/svamp217/com.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-brain"></i> CoM Reasoning</div>
+                <div class="transcript"><span class="repeated">If the cave is 919 feet deep and they need to travel 1307 feet, how far is the end of the cave?</span> <strong>To determine how far the end of the cave is, we need to understand that the cave is divided into two parts by the path they are traveling on. The path they are traveling on is 1307 feet long, and this path includes the depth of the cave. 1. Identify the total length of the path: 1307 feet. 2. Identify the depth of the cave: 919 feet. 3. Since the path includes both the depth of the cave and the horizontal distance to the end of the cave, we need to subtract the depth of the cave from the total length of the path to find the horizontal distance. Let's denote the horizontal distance to the end of the cave as x. According to the problem, the horizontal distance x is the remaining part of the path after accounting for the depth of the cave. We can set up the following equation: x = 1307 - 919. Now, let's perform the subtraction: x = 1307 - 919 = 388. Therefore, the distance from the start of the path to the end of the cave is 388 feet.</strong> The answer is 388. </div>
+                <audio controls><source src="./docs/audios/svamp217/comthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning</div>
+                <div class="transcript"><strong>cave 919 feet deep 1307 feet end 919 + 1307 2226 feet.</strong> The answer is 2226.</div>
+                <audio controls><source src="./docs/audios/svamp217/ecomthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 3: Code -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-code"></i> Case 3: Code Execution</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">Here's a piece of code: sum starts at 0; i goes from 4 to 9; each time, i is added to sum; finally, print sum. What will be printed?</div>
+            <audio controls><source src="./docs/audios/code/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>39</strong>
+          </div>
+
+          <div class="responses-grid">
+            <div class="responses-row responses-row-3">
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-robot"></i> CoM</div>
+                <div class="transcript"><span class="repeated">Here's a piece of code: sum = 0; i = 4; while (i > 0) { sum += i; i-- } Finally print sum. What will be printed?</span> The code will print: 10. Here's a step-by-step explanation: 1. Initialize sum to 0 and i to 4. 2. Enter the while loop. 3. In the first iteration, i is 4, so sum is updated to 4 (4 + 4 = 8). 4. In the second iteration, i is 3, so sum is updated to 8 (8 + 3 = 11). 5. In the third iteration, i is 2, so sum is updated to 10 (11 + 2 = 13). 6. In the fourth iteration, i is 1, so sum is updated to 10 (10 + 1 = 11). 7. In the fifth iteration, i is 0, so the condition i > 0 is false, and the loop terminates. Therefore, the final value of sum is 10.</div>
+                <audio controls><source src="./docs/audios/code/com.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-brain"></i> CoM Reasoning</div>
+                <div class="transcript"><span class="repeated">Here is a piece of code: sum = 0; i goes from 4 to 9 each time i is added to sum. Finally print sum. What will be printed?</span> <strong>Sum = 0; i goes from 4 to 9 each time i is added to sum. Finally print sum. What will be printed? Option a.</strong> The answer is 14. </div>
+                <audio controls><source src="./docs/audios/code/comthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning</div>
+                <div class="transcript"><strong>sum 4 5 6 7 8 9 39.</strong> The answer is 39.</div>
+                <audio controls><source src="./docs/audios/code/ecomthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 4: LLaMA-QA -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-globe-europe"></i> Case 4: Knowledge Question</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">Who wrote the famous book "Pride and Prejudice"?</div>
+            <audio controls><source src="./docs/audios/llamaq28/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>Jane Austen</strong>
+          </div>
+
+          <div class="responses-grid">
+            <div class="responses-row responses-row-3">
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-robot"></i> CoM</div>
+                <div class="transcript"><span class="repeated">Who wrote the famous book "Pride and Prejudice"?</span> The famous book "Pride and Prejudice" was written by Jane Austen, an English novelist. The novel was first published in 1813 and is considered one of the greatest works of English literature. It is a classic of the Austen family and is still widely read and studied today.</div>
+                <audio controls><source src="./docs/audios/llamaq28/com.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-brain"></i> CoM Reasoning</div>
+                <div class="transcript"><span class="repeated">Who wrote the famous book "Pride and Prejudice"?</span> <strong>The famous book "Pride and Prejudice" was written by Jane Austen, a renowned English novelist. The novel is set in the late 18th century and early 19th century, primarily focusing on the social dynamics and personal relationships among the main characters. The story revolves around Elizabeth Bennet, a young woman from a modest family, and her experiences with marriage, social standing, and personal growth. The novel is celebrated for its rich character development, sharp social commentary, and its exploration of themes such as class, gender, and individuality. Jane Austen (1775-1817) was born into a family of modest means in Steventon, near Reading, England. Her family was well-connected in the literary and social circles of the time, which provided her with a unique perspective on life and literature. Austen's writing style is characterized by her meticulous attention to detail, her ability to bring characters to life with depth and nuance, and her keen observations of human nature. "Pride and Prejudice" is one of her most famous works, published in 1813. The novel was initially published in two volumes, with the first volume containing the first 34 chapters and the second volume containing the remaining 34 chapters. The novel was well-received upon its publication and has since become a classic of English literature, widely studied and enjoyed by readers around the world. In addition to "Pride and Prejudice," Jane Austen also wrote several other notable works, including "Sense and Sensibility," "Northanger Abbey," and "Emma." Her novels are celebrated for their depth, complexity, and enduring popularity, and she is often referred to as the "Queen of English Literature." In conclusion, Jane Austen is the author of the famous book "Pride and Prejudice," and her writing has had a profound impact on the world of literature and culture.</strong> The answer is Jane Austen. </div>
+                <audio controls><source src="./docs/audios/llamaq28/comthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning</div>
+                <div class="transcript"><strong>Jane Austen.</strong> The answer is Jane Austen.</div>
+                <audio controls><source src="./docs/audios/llamaq28/ecomthink.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ Examples of Responses ════════════════ -->
+  <section id="examples-ratio">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-flask"></i> Cases of Different Compression Ratio</h2>
+      
+      <!-- Multiarith Example -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-book"></i> MultiArith</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">A book store had 41 books in the bargain bin. If they sold 33 books, but then put 2 more in the bin, how many books would be in the bin?</div>
+            <audio controls><source src="./docs/audios/multiarith/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>10</strong>
+          </div>
+
+          <div class="responses-grid">
+            <!-- Row: ECoM Reasoning variants -->
+            <div class="responses-row responses-row-3">
+              <!-- ECoM Reasoning 100% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 100%</div>
+                <div class="transcript"><strong>The number of books in the bin is 41 - 33 = 8 books. After adding 2 books, the number of books in the bin is 8 + 2 = 10 books.</strong> The answer is 10.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink100.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 80% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 80%</div>
+                <div class="transcript"><strong>Barren bin 41 - 33 = 8 books. Adding 2 books bin 8 + 2 = 10 books.</strong> The answer is 10.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink80.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 60% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 60%</div>
+                <div class="transcript"><strong>Bookstore sold 33 books 41 - 33 = 8 books put 2 books 8 + 2 = 10 books.</strong> The answer is 10.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink60.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+
+            <!-- Row 3: More ECoM Reasoning variants -->
+            <div class="responses-row responses-row-3">
+              <!-- ECoM Reasoning 40% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 40%</div>
+                <div class="transcript"><strong>Bookstore sold 33 41 - 33 8 put 2 8 + 2 10.</strong> The answer is 10.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink40.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 20% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 20%</div>
+                <div class="transcript"><strong>41 33 74 2 76.</strong> The answer is 76.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink20.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 0% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 0%</div>
+                <div class="transcript">The answer is 10.</div>
+                <audio controls><source src="./docs/audios/multiarith/ecomthink0.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AddSub Example -->
+      <div class="example-card">
+        <div class="example-header">
+          <h3><i class="fas fa-calculator"></i>AddSub</h3>
+        </div>
+        <div class="example-body">
+          <div class="question-box">
+            <div class="label"><i class="fas fa-question-circle"></i> Question</div>
+            <div class="text">Joan had 5 dimes in her bank. She spent 2 of her dimes. How many dimes does she have now?</div>
+            <audio controls><source src="./docs/audios/addsub/question.wav" type="audio/wav">Your browser does not support audio.</audio>
+          </div>
+
+          <div class="ground-truth">
+            <i class="fas fa-check-circle"></i> Ground Truth: <strong>3</strong>
+          </div>
+
+          <div class="responses-grid">
+            <!-- Row: ECoM Reasoning variants -->
+            <div class="responses-row responses-row-3">
+              <!-- ECoM Reasoning 100% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 100%</div>
+                <div class="transcript"><strong>Joan had 5 dimes and spent 2, so she has 5-2 = 3 dimes left.</strong> The answer is 3.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink100.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 80% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 80%</div>
+                <div class="transcript"><strong>John spent 2 dimes 10 dimes - 2 dimes = 8 dimes.</strong> The answer is 8.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink80.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 60% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 60%</div>
+                <div class="transcript"><strong>John spent 2 dimes 5 - 2 3 dimes.</strong> The answer is 3.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink60.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+
+            <!-- Row 3: More ECoM Reasoning variants -->
+            <div class="responses-row responses-row-3">
+              <!-- ECoM Reasoning 40% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 40%</div>
+                <div class="transcript"><strong>John 5 - 2 3.</strong> The answer is 3.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink40.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 20% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 20%</div>
+                <div class="transcript"><strong>5 2 3.</strong> The answer is 3.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink20.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+
+              <!-- ECoM Reasoning 0% -->
+              <div class="response-card">
+                <div class="model-name"><i class="fas fa-bolt"></i> ECoM Reasoning 0%</div>
+                <div class="transcript">The answer is 3.</div>
+                <audio controls><source src="./docs/audios/addsub/ecomthink0.wav" type="audio/wav">Your browser does not support audio.</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════ Footer ════════════════ -->
+<footer>
+  <p><strong>ECoM-Reasoning</strong> &mdash; Efficient Chain-of-Modality Reasoning  via Progressive Compression for Spoken Language Models</p>
+  <p style="margin-top: 8px; opacity: 0.7;">&copy; 2026 &nbsp;|&nbsp; Accept by ACM MM &nbsp;|&nbsp; Project Page</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var audios = document.querySelectorAll('audio');
+  audios.forEach(function(audio) {
+    audio.addEventListener('play', function() {
+      audios.forEach(function(other) {
+        if (other !== audio) other.pause();
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

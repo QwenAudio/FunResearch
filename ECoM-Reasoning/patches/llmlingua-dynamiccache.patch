@@ -1,0 +1,47 @@
+diff --git a/llmlingua/prompt_compressor.py b/llmlingua/prompt_compressor.py
+index 84e390e..4c0a42a 100644
+--- a/llmlingua/prompt_compressor.py
++++ b/llmlingua/prompt_compressor.py
+@@ -21,6 +21,11 @@ from transformers import (
+     AutoModelForTokenClassification,
+     AutoTokenizer,
+ )
++try:
++    from transformers import DynamicCache
++    HAS_DYNAMIC_CACHE = True
++except ImportError:
++    HAS_DYNAMIC_CACHE = False
+ 
+ from .utils import (
+     TokenClfDataset,
+@@ -179,7 +184,20 @@ class PromptCompressor:
+             input_ids = tokenized_text["input_ids"].to(self.device)
+             attention_mask = tokenized_text["attention_mask"].to(self.device)
+         if past_key_values is not None:
+-            past_length = past_key_values[0][0].shape[2]
++            # iterative_compress_prompt may convert DynamicCache back to
++            # list-of-lists (legacy format).  Newer transformers (>=4.45)
++            # require a Cache object, so convert here before calling model.
++            if HAS_DYNAMIC_CACHE and not isinstance(past_key_values, DynamicCache):
++                legacy = past_key_values
++                past_key_values = DynamicCache()
++                for layer_idx in range(len(legacy)):
++                    past_key_values.update(
++                        legacy[layer_idx][0], legacy[layer_idx][1], layer_idx
++                    )
++            if isinstance(past_key_values, DynamicCache):
++                past_length = past_key_values.get_seq_length()
++            else:
++                past_length = past_key_values[0][0].shape[2]
+         else:
+             past_length = 0
+         if end is None:
+@@ -423,7 +441,7 @@ class PromptCompressor:
+             strict_preserve_uncompressed=strict_preserve_uncompressed,
+         )
+ 
+-    def compress_prompt(
++    def compress_prompt( # NOTE
+         self,
+         context: List[str],
+         instruction: str = "",

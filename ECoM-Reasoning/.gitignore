@@ -1,0 +1,15 @@
+# Experiment outputs (logs, hydra configs, generated audio)
+exp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Logs / local runs
+*.log
+wandb/
+
+# OS / editor
+.DS_Store

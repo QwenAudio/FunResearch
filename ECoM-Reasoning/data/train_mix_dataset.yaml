@@ -1,0 +1,30 @@
+# Training data manifest for the ECoM (Efficient Chain-of-Modality) model.
+# Consumed by src/speech_dataset_s2t.py (get_speech_dataset).
+
+datasets:
+- name: speech
+  dataset_path: /path/to/Chat-Dataset/train_4ktotal.jsonl
+  data_struct: com
+  sampling_rate: 1.0
+  compress:
+    stage: null
+    rate: 1.0
+  system_prompt:  Conduct a spoken conversation with the user.
+
+- name: mathqa
+  dataset_path: /path/to/Math-Dataset/Compression/train_3k.jsonl
+  data_struct: com-reason
+  sampling_rate: 1.0
+  compress:
+    stage: null
+    rate: 1.0
+  system_prompt: Conduct a spoken conversation with the user.
+
+- name: mathqa compression
+  dataset_path: /path/to/Math-Dataset/Compression/train_3k_compress_0.4.jsonl
+  data_struct: sats-reason
+  sampling_rate: 1.0
+  compress:
+    stage: solution
+    rate: 0.4
+  system_prompt: Conduct a spoken conversation with the user.
