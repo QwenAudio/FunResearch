@@ -1,11 +1,21 @@
-# ECoM-Reasoning
+# Efficient Chain-of-Modality Reasoning via Progressive Compression for Spoken Language Models
 
-Efficient Chain-of-Modality (ECoM) reasoning for spoken language models: a text LLM
-(Qwen2.5-1.5B) + a Whisper speech encoder + a CosyVoice speech codec, trained to *reason
-before it speaks*. Reasoning traces are **compressed** (LLMLingua token-skipping) so the
-model learns an efficient chain of modality instead of a verbose one.
+<p align="center">
+  <strong>Pengchao Feng, Chao-Hong Tan, Qian Chen, Wen Wang, Xiangang Li, Xie Chen</strong>
+</p>
 
-Audio samples: open [`index.html`](index.html) (assets in [`docs/`](docs/)).
+<p align="center">
+  <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-Coming%20Soon-b31b1b.svg"></a>
+  <a href="https://github.com/FunAudioLLM/FunResearch/tree/main/ECoM-Reasoning"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717.svg"></a>
+  <a href="https://funaudiollm.github.io/FunResearch/ECoM-Reasoning/"><img alt="Demo" src="https://img.shields.io/badge/Demo-Audio%20Samples-2a4a5e.svg"></a>
+</p>
+
+<p align="center">
+  <img src="docs/images/ECoM_Reasoning_Framework.png" alt="ECoM Reasoning Framework" width="85%">
+</p>
+
+**ECoM-Reasoning** introduces an efficient Chain-of-Modality reasoning framework for spoken language models, using **progressive compression** to preserve essential reasoning structure while reducing redundant intermediate tokens before speech generation.
+
 
 ## Install
 
@@ -15,15 +25,16 @@ If you are using this project inside **FunResearch**, enter the project director
 cd ECoM-Reasoning
 ```
 
-If you are using it as a standalone repository, clone it and initialise submodules:
+If you want to clone only this project from **FunResearch**, use sparse checkout:
 
 ```bash
-git clone <repo-url> ECoM-Reasoning && cd ECoM-Reasoning
-git submodule update --init --recursive
+git clone --filter=blob:none --sparse https://github.com/FunAudioLLM/FunResearch.git
+cd FunResearch
+git sparse-checkout set ECoM-Reasoning
+cd ECoM-Reasoning
 ```
 
-When this project is copied into a larger repository and is not itself a Git repository,
-initialise the external dependencies directly:
+Then initialise the external dependencies directly:
 
 ```bash
 git clone https://github.com/X-LANCE/SLAM-LLM.git SLAM-LLM

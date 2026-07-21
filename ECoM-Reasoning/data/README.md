@@ -1,6 +1,6 @@
 # Data
 
-Data-construction script + training/validation manifests for ECoM.
+Data-construction script + training/validation manifests for ECoM Reasoning.
 
 ## 1. Compress the reasoning traces
 
@@ -15,8 +15,7 @@ export LLMLINGUA2_PATH=/path/to/llmlingua-2-xlm-roberta-large-meetingbank
 python data/tokenskip_math_parallel.py
 ```
 
-Output: `$MATH_DATASET_DIR/Compression/train_compress_all_ratios_<mode>.jsonl`
-(modes and keep-ratios are set near the top of the script; default ratios `[0.2, 0.4, 0.6, 0.8]`).
+Output: `$MATH_DATASET_DIR/Compression/train_compress_all_ratios_<mode>.jsonl`.
 
 ## 2. Point the manifests at your data
 
