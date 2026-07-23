@@ -489,14 +489,11 @@
 <header class="hero">
   <div class="hero-content">
     <h1>Efficient Chain-of-Modality Reasoning via Progressive Compression<br/> for <span>Spoken Language Models</span></h1>
-    <!-- <p class="subtitle">
-      <i class="fas fa-bolt"></i> The implementation will be open-sourced after publication.
-    </p> -->
-    <p class="authors">
+    <!-- <p class="authors">
       <i class="fas fa-users"></i> Pengchao Feng, Chao-Hong Tan, Qian Chen, Wen Wang, Xiangang Li, Xie Chen
-    </p>
+    </p> -->
     <div class="btn-group">
-      <a class="btn btn-paper" href="#"><i class="fas fa-file-pdf"></i> Paper (Coming Soon)</a>
+      <a class="btn btn-paper" href="https://arxiv.org/abs/2607.19932v1" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> Paper</a>
       <a class="btn btn-code" href="https://github.com/FunAudioLLM/FunResearch/tree/main/ECoM-Reasoning" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
@@ -508,17 +505,13 @@
     <div class="container">
       <div class="overview-card">
         <div class="overview-card-body">
-          <!-- Table of Contents -->
-          <div class="toc-section">
-            <h3><i class="fas fa-list"></i> Case Studies </h3>
-            <div class="toc">
-              <a href="#examples-compression"><i class="fas fa-compress-alt"></i> Token-Level Compression</a>
-              <a href="#examples-responses"><i class="fas fa-flask"></i> Different Framework Responses</a>
-              <a href="#examples-ratio"><i class="fas fa-flask"></i> Different Compression Ratios</a>
+          <!-- Abstract -->
+          <div class="abstract-section">
+            <h2><i class="fas fa-file-alt"></i> Abstract</h2>
+            <div class="abstract-text">
+              Spoken language models (SLMs) enable natural human-computer interaction, but their reasoning ability still lags behind that of text-based large language models, especially on spoken mathematical question answering tasks. One important reason is that SLMs reason over purely verbalized mathematical expressions, which are harder to interpret than symbolic text. However, directly transferring text-based reasoning to SLMs is nontrivial due to architectural constraints and the additional computational requirements. To address this challenge, we propose <strong>Efficient Chain-of-Modality Reasoning (ECoM Reasoning)</strong>, the first framework to introduce compressed reasoning into SLMs. By compressing the textual component so that it jointly serves as speech guidance and reasoning representation, ECoM Reasoning improves reasoning accuracy while using a smaller token budget than the standard Chain-of-Modality (CoM) architecture, which generates intermediate text before speech. To train this capability, we further propose <strong>Progressive Compression</strong>, a curriculum-based strategy that gradually trains the model from full-form reasoning to compressed reasoning. Experiments on spoken mathematical question answering benchmarks show that ECoM Reasoning improves accuracy by <strong>21%</strong> over standard CoM without explicit reasoning, and by <strong>3%</strong> over CoM with full reasoning traces while using only <strong>40% of the text tokens</strong>, demonstrating that it enhances SLM reasoning while remaining inference-efficient.
             </div>
           </div>
-          
-          <br><br>
           
           <!-- Figure -->
           <div class="figure-section">
@@ -530,6 +523,16 @@
             </figure>
           </div>
 
+          <!-- Table of Contents -->
+          <div class="toc-section">
+            <h3><i class="fas fa-list"></i> Case Studies </h3>
+            <div class="toc">
+              <a href="#examples-compression"><i class="fas fa-compress-alt"></i> Token-Level Compression</a>
+              <a href="#examples-responses"><i class="fas fa-flask"></i> Different Framework Responses</a>
+              <a href="#examples-ratio"><i class="fas fa-flask"></i> Different Compression Ratios</a>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>

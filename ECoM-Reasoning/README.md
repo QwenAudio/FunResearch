@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-Coming%20Soon-b31b1b.svg"></a>
+  <a href="https://arxiv.org/abs/2607.19932v1"><img alt="Paper" src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg"></a>
   <a href="https://github.com/FunAudioLLM/FunResearch/tree/main/ECoM-Reasoning"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717.svg"></a>
   <a href="https://funaudiollm.github.io/FunResearch/ECoM-Reasoning/"><img alt="Demo" src="https://img.shields.io/badge/Demo-Audio%20Samples-2a4a5e.svg"></a>
 </p>
@@ -14,7 +14,7 @@
   <img src="docs/images/ECoM_Reasoning_Framework.png" alt="ECoM Reasoning Framework" width="85%">
 </p>
 
-**ECoM-Reasoning** introduces an efficient Chain-of-Modality reasoning framework for spoken language models, using **progressive compression** to preserve essential reasoning structure while reducing redundant intermediate tokens before speech generation.
+We propose **Efficient Chain-of-Modality Reasoning (ECoM Reasoning)**, the first framework to introduce compressed reasoning into spoken language models (SLMs). By compressing the textual component so that it jointly serves as speech guidance and reasoning representation, ECoM Reasoning improves reasoning accuracy while using a smaller token budget than the standard Chain-of-Modality (CoM) architecture, which generates intermediate text before speech. To train this capability, we further propose **Progressive Compression**, a curriculum-based strategy that gradually trains the model from full-form reasoning to compressed reasoning.
 
 
 ## Install

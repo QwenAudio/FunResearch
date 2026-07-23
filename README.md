@@ -10,7 +10,7 @@ Welcome to **Fun Research**! This repository is maintained by the **Speech Team 
 ## Featured Projects
 Explore our latest research implementations:
 1. [Say More with Less: Variable-Frame-Rate Speech Tokenization via Adaptive Clustering and Implicit Duration Coding](VARSTok), AAAI 2026 (oral)
-2. [ECoM-Reasoning: Efficient Chain-of-Modality Reasoning for Spoken Language Models](ECoM-Reasoning)
+2. [ECoM-Reasoning: Efficient Chain-of-Modality Reasoning for Spoken Language Models](ECoM-Reasoning), ACM MM 2026
 
 
 
