@@ -6,8 +6,8 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2607.19932v1"><img alt="Paper" src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg"></a>
-  <a href="https://github.com/FunAudioLLM/FunResearch/tree/main/ECoM-Reasoning"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717.svg"></a>
-  <a href="https://funaudiollm.github.io/FunResearch/ECoM-Reasoning/"><img alt="Demo" src="https://img.shields.io/badge/Demo-Audio%20Samples-2a4a5e.svg"></a>
+  <a href="https://github.com/QwenAudio/FunResearch/tree/main/ECoM-Reasoning"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717.svg"></a>
+  <a href="https://qwenaudio.github.io/FunResearch/ECoM-Reasoning/"><img alt="Demo" src="https://img.shields.io/badge/Demo-Audio%20Samples-2a4a5e.svg"></a>
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@ cd ECoM-Reasoning
 If you want to clone only this project from **FunResearch**, use sparse checkout:
 
 ```bash
-git clone --filter=blob:none --sparse https://github.com/FunAudioLLM/FunResearch.git
+git clone --filter=blob:none --sparse https://github.com/QwenAudio/FunResearch.git
 cd FunResearch
 git sparse-checkout set ECoM-Reasoning
 cd ECoM-Reasoning
