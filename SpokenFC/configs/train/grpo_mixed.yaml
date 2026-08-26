@@ -1,0 +1,33 @@
+# GRPO mixed-reward training configuration for Spoken Function Calling
+model: ${MODEL_PATH}
+rlhf_type: grpo
+reward_funcs: sfc_reward_list
+external_plugins: ${REPO_ROOT}/project/plugins/sfc_reward.py
+
+dataset:
+  train: ${DATA_ROOT}/processed/data_msswift/train_id.json
+  val: ${DATA_ROOT}/processed/data_msswift/test_ood.json
+
+training:
+  train_type: lora
+  lora_rank: 8
+  lora_alpha: 32
+  freeze_vit: true
+  num_train_epochs: 1
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 16
+  learning_rate: 1.0e-5
+  gradient_accumulation_steps: 3
+  max_length: 2048
+  num_generations: 8
+  torch_dtype: bfloat16
+  deepspeed: zero2
+
+vllm:
+  use_vllm: true
+  vllm_mode: colocate
+  vllm_gpu_memory_utilization: 0.4
+  vllm_max_model_len: 2048
+  vllm_tensor_parallel_size: 4
+
+output_dir: ${OUTPUT_ROOT}/grpo_mixed

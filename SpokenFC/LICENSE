@@ -1,0 +1,26 @@
+Creative Commons Attribution-NonCommercial 4.0 International
+SPDX-License-Identifier: CC-BY-NC-4.0
+
+Copyright (c) 2026 SpokenFC Authors
+
+Except for third-party materials that are identified below or accompanied by
+separate licensing terms, the original code, documentation, dataset metadata,
+and other original material in this repository are licensed under the Creative
+Commons Attribution-NonCommercial 4.0 International Public License.
+
+You are free to share and adapt the licensed material for noncommercial
+purposes, provided that you give appropriate credit, provide a link to the
+license, and indicate whether changes were made.
+
+The complete, legally binding license terms are available at:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+The human-readable license summary is available at:
+https://creativecommons.org/licenses/by-nc/4.0/
+
+Third-party materials
+---------------------
+
+The `ms-swift/` directory is derived from the ModelScope ms-swift project and
+remains subject to its own license and notices. Any other third-party material
+included in this repository remains subject to its respective original license.

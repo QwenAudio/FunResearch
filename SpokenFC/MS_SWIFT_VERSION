@@ -1,0 +1,3 @@
+# Vendored ms-swift framework (source code only, training outputs excluded)
+# Upstream: https://github.com/modelscope/ms-swift
+# Copied from local ms-swift installation; output/ and swanlog/ excluded

@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Training / experiment outputs (do not commit)
+outputs/
+ms-swift/output/
+ms-swift/output_*/
+ms-swift/outputs/
+ms-swift/swanlog/
+ms-swift/wandb/
+project/eval/results/
+
+# Model checkpoints
+*.pt
+*.pth
+*.safetensors
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.log
+*.swp
+
+# Large cache
+*.cache
+.cache/
