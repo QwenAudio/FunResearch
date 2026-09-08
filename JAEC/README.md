@@ -23,4 +23,6 @@ Each RTF is the median of 10 runs of the command shown above.
 ## License
 
 The source code, pretrained weights, and precompiled runtime libraries in this
-repository are licensed under the [BSD 3-Clause License](LICENSE).
+repository are licensed under the [Apache License 2.0](LICENSE) (Apache-2.0).
+Third-party components retain their original licenses; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
