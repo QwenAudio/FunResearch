@@ -34,5 +34,5 @@ the final release review. No blanket project license overrides their terms.
 The verified environment's installed metadata declares **GPLv2+ for zhconv 1.4.3**.
 This needs an explicit compatibility review before choosing the project's license.
 It is not a conclusion that every part of this project must use that license.
-See [dependency inventory](README.md#dependency-inventory); do not change metric dependencies
+See [metric dependencies](requirements-metrics.txt); do not change metric dependencies
 merely to simplify packaging without establishing metric equivalence.

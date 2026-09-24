@@ -31,7 +31,7 @@ AGENT = PACKAGE_ROOT / "agent.py"
 AGENT_CONFIG = PACKAGE_ROOT / "config.py"
 DEFAULT_PROMPT_PACK = ROOT / "prompts/zh"
 DATA_ROOT = Path(
-    "data/prepared/Vertical-Domain"
+    "data/gigaspeechbench/prepared/Vertical-Domain"
 )
 DEFAULT_RUN_ROOT = ROOT / "runs/zh"
 DEFAULT_LLM_URLS = (
@@ -539,7 +539,6 @@ def main() -> None:
         ROOT / "requirements.txt",
         ROOT / "requirements-metrics.txt",
         ROOT / "requirements-data.txt",
-        ROOT / "requirements.lock",
         ROOT / "pyproject.toml",
     ):
         shutil.copy2(source, source_snapshot / source.name)

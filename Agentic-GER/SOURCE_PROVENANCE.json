@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "scope": "Allowlisted source-byte provenance; no source Git history or private absolute paths included",
-  "packaging_changes": "Source package layout, module entry points and repository paths; no scientific prompt or normalization changes. See docs/reproduction.md for verification.",
+  "packaging_changes": "Source package layout, module entry points, repository paths, configuration IDs, and non-scientific field names; no scientific prompt or normalization changes. See docs/reproduction.md for verification.",
   "files": [
     {
       "file": "src/agentic_ger/agent.py",
@@ -18,7 +18,7 @@
     {
       "file": "src/agentic_ger/runner.py",
       "source_sha256": "f53cea701c5ce0b218b93ffba9abeebd441bc97b0b3ddbeb585e3033cf259870",
-      "candidate_sha256": "f13db42e7da12da4689e475d730c912485bac5a180734260c18448977b59dd23",
+      "candidate_sha256": "2a811df5e422c8709695215f23c032c7d3bc9bb52368ee111ff06f6d194bd2c3",
       "byte_identical": false
     },
     {
@@ -30,43 +30,43 @@
     {
       "file": "src/agentic_ger/evaluation/verify_zh.py",
       "source_sha256": "f5125792415bbe0e297a5d42af577e14564ce4a610019a8f3b2d4313e579fe40",
-      "candidate_sha256": "a051e61efe5554c99211d5616249fdb545c1a0e0511101037806aad860ea2b65",
+      "candidate_sha256": "8a0a170044bdc087a6a756b41efc18d71e9b19be88c6c9968c3df3fb6d849d3d",
       "byte_identical": false
     },
     {
       "file": "src/agentic_ger/evaluation/verify_en.py",
       "source_sha256": "a74bd4d771549c8ac29101ba3460715ab9144f0b9d0a1f19936ca311d7b90df5",
-      "candidate_sha256": "e1b0fcbdda559fdfa9a30d036c9fb0a12ec870a45bf37941128086ae501efb23",
+      "candidate_sha256": "baf23dceae2c720356863dfcd889a7813a5fbb8a2353ca8602595aad49ab49fb",
       "byte_identical": false
     },
     {
       "file": "configs/en.json",
       "source_sha256": "fc80282275e8a32b91bdb1d8ad85a4c8631b179b926c788f2c498ba8a5ad50a1",
-      "candidate_sha256": "8acd0d8e9c8cf0f58334edc279992e7d6028fc272059df2d5280b5ddc5f91d6a",
+      "candidate_sha256": "a5d89ea0706ef1bc52edfa9a4f2bbd026640299ea5862e466d9d66a5ead73c4f",
       "byte_identical": false
     },
     {
       "file": "configs/zh.json",
       "source_sha256": "5f8abd1ec202058d5a210343856e7ebcea5a2e27a5903a02d7fc379bfe3d0de1",
-      "candidate_sha256": "5cd4f3d4b0214b99e9cb32909baa9310bf9fb44d2725fabd07111f44b137de0c",
+      "candidate_sha256": "c52467bafda0d0fe6fc012876ac71b35154d5f6de987249a7ee0664b2d0a5c14",
       "byte_identical": false
     },
     {
       "file": "src/agentic_ger/evaluation/evaluate_zh.py",
       "source_sha256": "9d22a2b856965c04f7200cffbf26256654aac85db6f9033e82d5fec4e1841509",
-      "candidate_sha256": "13021a6ea31184afc0968d004fb34d2cb90a12439a75d8a4c9c1046a8e0d056f",
+      "candidate_sha256": "2f012c3397a85434f401e4419d83c16fa33aefa8dcd2b45bf2817aa3e0a1e1f1",
       "byte_identical": false
     },
     {
       "file": "src/agentic_ger/evaluation/evaluate_en.py",
       "source_sha256": "2b1ef842010f24b088f9378cc9e2b27127e7fe6c402aef7a5de7a5ec654b6663",
-      "candidate_sha256": "06af88fac191f214034b495c2d32bf70617457f1417e9b42abea626ac4db94e9",
+      "candidate_sha256": "6113a11bc45c60995f2c3459801b3b982af756e930bea6f8dec5474fd7a68607",
       "byte_identical": false
     },
     {
       "file": "src/agentic_ger/experiment.py",
       "source_sha256": "a0d23c766543e5caf6d7e7b76fea3a436d0c5a3b2b0b6e757775efdd80682ae6",
-      "candidate_sha256": "b11e7b9f95155ad70fa0b84fd3194a5d3c38225bb75c5ea6ded872344a24688d",
+      "candidate_sha256": "34b389e6d1322913b0031740d62a8878c635224c838ba5efed5b7828b7c6dad1",
       "byte_identical": false
     },
     {

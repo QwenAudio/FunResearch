@@ -12,7 +12,7 @@ from agentic_ger.evaluation.metrics_en import add_result, empty_result, evaluate
 
 
 DEFAULT_DATA_ROOT = Path(
-    "data/prepared/Vertical-Domain"
+    "data/gigaspeechbench/prepared/Vertical-Domain"
 )
 
 # Counts reproduced by the official GigaSpeechBench evaluator at commit

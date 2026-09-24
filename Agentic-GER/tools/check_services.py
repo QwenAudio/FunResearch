@@ -21,10 +21,10 @@ def main() -> None:
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
     urls = args.llm_url or config["services"]["correction_urls"]
-    asr = args.asr_url or config["services"]["relisten_url"]
+    asr = args.asr_url or config["services"]["retranscription_url"]
     model = config["models"]["correction"]
     require_full_context_services(urls, config["runtime"]["required_context"], model)
-    require_asr_service(asr, config["models"]["relisten"])
+    require_asr_service(asr, config["models"]["retranscription"])
     for url in urls:
         response = requests.post(url.split("/v1/chat/completions", 1)[0] + "/tokenize",
                                  headers=service_headers("correction"),

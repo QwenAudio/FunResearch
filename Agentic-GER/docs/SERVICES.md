@@ -21,7 +21,7 @@ implement the following API, not merely listen on the expected port.
 - Default LLM request deadline: 7,200 seconds; recording timeout: 21,600 seconds.
   These are upper bounds, not expected latencies. Three bounded LLM attempts.
 
-## Auxiliary ASR (Qwen3-ASR-1.7B)
+## Re-transcription ASR (Qwen3-ASR-1.7B)
 
 - `GET /v1/models`: configured model ID must exist.
 - `POST /v1/chat/completions`: one user message with a content item

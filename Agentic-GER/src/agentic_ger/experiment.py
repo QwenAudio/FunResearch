@@ -141,8 +141,8 @@ def validate_config(path: Path, config: dict[str, Any]) -> dict[str, Any]:
         raise SystemExit(f"data.root does not exist: {data_root}")
     string_value(data, "baseline_system")
     string_value(models, "correction")
-    string_value(models, "relisten")
-    string_value(services, "relisten_url")
+    string_value(models, "retranscription")
+    string_value(services, "retranscription_url")
     integer_value(flow, "candidates_per_scan", 1)
     integer_value(flow, "max_loops", 1)
     integer_value(flow, "max_patches", 1)
@@ -256,7 +256,7 @@ def main() -> None:
     if args.llm_url:
         object_value(effective_config, "services")["correction_urls"] = args.llm_url
     if args.asr_url:
-        object_value(effective_config, "services")["relisten_url"] = args.asr_url
+        object_value(effective_config, "services")["retranscription_url"] = args.asr_url
     if args.thinking_override is not None:
         object_value(effective_config, "inference")["thinking"] = (
             args.thinking_override
@@ -265,7 +265,7 @@ def main() -> None:
     run_root = (args.run_root or default_run_root(config)).resolve()
     data_root = Path(config["data"]["root"]).resolve()
     llm_urls = list(config["services"]["correction_urls"])
-    asr_url = str(config["services"]["relisten_url"])
+    asr_url = str(config["services"]["retranscription_url"])
     effective_config_path = run_root / "effective_experiment.json"
 
     batch_command = [
@@ -286,7 +286,7 @@ def main() -> None:
         "--llm-model",
         str(config["models"]["correction"]),
         "--asr-model",
-        str(config["models"]["relisten"]),
+        str(config["models"]["retranscription"]),
         "--asr-url",
         asr_url,
         "--prompt-pack",

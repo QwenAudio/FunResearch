@@ -27,7 +27,7 @@ from agentic_ger.utils import REPO_ROOT
 ROOT = REPO_ROOT
 DEFAULT_RUN_ROOT = ROOT / "runs/en"
 DEFAULT_DATA_ROOT = Path(
-    "data/prepared/Vertical-Domain"
+    "data/gigaspeechbench/prepared/Vertical-Domain"
 )
 
 

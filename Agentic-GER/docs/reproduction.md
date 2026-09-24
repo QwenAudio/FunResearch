@@ -20,7 +20,7 @@ container or machine for a stronger boundary.
    Do not launch the full cohorts or matrix for default acceptance.
 7. Require `complete=1, failed=0` for each batch. Inspect the final transcript,
    offline evaluation, traces, HTML reports and `--report-only` regeneration.
-   Record which of summary/scan/relisten/check/edit actually occurred. A normal
+   Record which of summary/scan/re-transcription/check/edit actually occurred. A normal
    keep decision is valid; do not force edits or tune prompts against references.
 8. Run `.venv/bin/python tools/check_release.py --tracked`. Check Git status,
    ignored generated files, source provenance and frozen vendor hashes.
@@ -59,5 +59,4 @@ Before distributing a fork or release:
 - Inspect Git history, remotes, author identity and hooks before publishing.
   Source-only exports must not import development Git objects or credentials.
 
-See [third-party notices](../THIRD_PARTY_NOTICES.md) and the
-[dependency inventory](../README.md#dependency-inventory).
+See [third-party notices](../THIRD_PARTY_NOTICES.md).

@@ -1,20 +1,20 @@
 {
   "format_version": 1,
-  "id": "gsb_zh_qwen38",
+  "id": "agentic_ger_zh",
   "language": "CH",
   "data": {
-    "root": "data/prepared/Vertical-Domain",
+    "root": "data/gigaspeechbench/prepared/Vertical-Domain",
     "baseline_system": "FunASR-Realtime"
   },
   "models": {
     "correction": "qwen3.8-27b",
-    "relisten": "Qwen3-ASR-1.7B"
+    "retranscription": "Qwen3-ASR-1.7B"
   },
   "services": {
     "correction_urls": [
       "http://127.0.0.1:8002/v1/chat/completions"
     ],
-    "relisten_url": "http://127.0.0.1:7879/v1/chat/completions"
+    "retranscription_url": "http://127.0.0.1:7879/v1/chat/completions"
   },
   "prompt_pack": "prompts/zh",
   "flow": {
