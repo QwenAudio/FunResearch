@@ -1,5 +1,5 @@
 # Fun Research
-Welcome to **Fun Research**! This repository is maintained by the **Speech Team at Alibaba's Tongyi Lab**, serving as an open-source platform for our cutting-edge research in speech, audio, NLP technologies. We believe in accelerating scientific progress through transparent collaboration, and invite the global research community to explore, reproduce, and build upon our work.
+Welcome to **Fun Research**! This repository is maintained by the **Qwen Audio Team at Alibaba Group**, serving as an open-source platform for our cutting-edge research in speech, audio, NLP technologies. We believe in accelerating scientific progress through transparent collaboration, and invite the global research community to explore, reproduce, and build upon our work.
 
 
 ## Why Fun Research?
@@ -11,6 +11,8 @@ Welcome to **Fun Research**! This repository is maintained by the **Speech Team 
 Explore our latest research implementations:
 1. [Say More with Less: Variable-Frame-Rate Speech Tokenization via Adaptive Clustering and Implicit Duration Coding](VARSTok), AAAI 2026 (oral)
 2. [ECoM-Reasoning: Efficient Chain-of-Modality Reasoning for Spoken Language Models](ECoM-Reasoning), ACM MM 2026
+3. [Spoken Function Calling: A New Perspective on Spoken Language Understanding for Large Audio Language Models](SpokenFC), ACM MM 2026
+
 
 
 
