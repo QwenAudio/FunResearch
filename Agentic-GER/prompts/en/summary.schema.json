@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {"type": "string", "maxLength": 65536},
+    "domain": {"type": "string", "maxLength": 4096},
+    "entities": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "properties": {
+          "canonical": {"type": "string", "maxLength": 4096},
+          "observed_forms": {
+            "type": "array",
+            "maxItems": 64,
+            "items": {"type": "string", "maxLength": 4096}
+          },
+          "kind": {"type": "string", "maxLength": 2048}
+        },
+        "required": ["canonical", "observed_forms", "kind"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["summary", "domain", "entities"],
+  "additionalProperties": false
+}

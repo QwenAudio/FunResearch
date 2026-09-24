@@ -1,0 +1,2 @@
+-r requirements-metrics.txt
+requests==2.34.2
