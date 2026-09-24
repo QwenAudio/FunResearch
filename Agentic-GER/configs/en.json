@@ -1,0 +1,55 @@
+{
+  "format_version": 1,
+  "id": "gsb_en_qwen38",
+  "language": "EN",
+  "data": {
+    "root": "data/prepared/Vertical-Domain",
+    "baseline_system": "FunASR-Realtime"
+  },
+  "models": {
+    "correction": "qwen3.8-27b",
+    "relisten": "Qwen3-ASR-1.7B"
+  },
+  "services": {
+    "correction_urls": [
+      "http://127.0.0.1:8002/v1/chat/completions"
+    ],
+    "relisten_url": "http://127.0.0.1:7879/v1/chat/completions"
+  },
+  "prompt_pack": "prompts/en",
+  "flow": {
+    "candidates_per_scan": 8,
+    "max_loops": 32,
+    "max_patches": 48
+  },
+  "inference": {
+    "thinking": false,
+    "thinking_max_tokens": 32768,
+    "reasoning_effort": "medium",
+    "sampling": {
+      "nonthinking": {
+        "temperature": 0.1,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 1.5,
+        "repetition_penalty": 1.0
+      },
+      "thinking": {
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "repetition_penalty": 1.0
+      }
+    }
+  },
+  "runtime": {
+    "workers_per_correction_service": 16,
+    "required_context": 65536,
+    "llm_timeout_seconds": 7200,
+    "recording_timeout_seconds": 21600,
+    "retry_rounds": 0
+  }
+}

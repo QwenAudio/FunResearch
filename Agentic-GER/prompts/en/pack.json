@@ -1,0 +1,21 @@
+{
+  "format_version": 1,
+  "id": "en",
+  "stages": {
+    "summary": {
+      "prompt": "summary.txt",
+      "schema": "summary.schema.json",
+      "max_tokens": 16384
+    },
+    "scan": {
+      "prompt": "scan.txt",
+      "schema": "scan.schema.json",
+      "max_tokens": 16384
+    },
+    "check": {
+      "prompt": "check.txt",
+      "schema": "check.schema.json",
+      "max_tokens": 2048
+    }
+  }
+}

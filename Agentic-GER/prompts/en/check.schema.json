@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "decision": {"type": "string", "enum": ["keep", "edit"]},
+    "edited_segment": {"type": "string"},
+    "reason": {"type": "string", "maxLength": 32768}
+  },
+  "required": ["decision", "edited_segment", "reason"],
+  "additionalProperties": false
+}

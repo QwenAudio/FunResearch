@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {"type": "string", "maxLength": 600},
+    "domain": {"type": "string", "maxLength": 100},
+    "entities": {
+      "type": "array",
+      "items": {"type": "string", "maxLength": 100},
+      "maxItems": 24
+    }
+  },
+  "required": ["summary", "domain", "entities"],
+  "additionalProperties": false
+}

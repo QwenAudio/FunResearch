@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "suspects": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "segment_id": {"type": "integer"},
+          "focus": {"type": "string", "maxLength": 100},
+          "reason": {"type": "string", "maxLength": 200}
+        },
+        "required": ["segment_id", "focus", "reason"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["suspects"],
+  "additionalProperties": false
+}
