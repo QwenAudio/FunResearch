@@ -19,9 +19,6 @@ dependencies = [
     "huggingface-hub>=0.30,<1",
 ]
 
-[project.optional-dependencies]
-dev = ["pytest>=8"]
-
 [project.urls]
 Homepage = "https://github.com/QwenAudio/FunResearch/tree/main/S2ST-VoiceEval"
 Model = "https://huggingface.co/liangwenrui/S2ST-VoiceEval"
@@ -34,6 +31,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 s2st_voiceeval = ["UPSTREAM_LICENSE"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
