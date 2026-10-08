@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+checkpoints/
+*.safetensors
+*.pt
+*.pth
+*.wav
+*.flac
