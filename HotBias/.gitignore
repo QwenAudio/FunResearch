@@ -1,0 +1,12 @@
+/weights/
+/paper/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+/outputs/
+/runs/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
