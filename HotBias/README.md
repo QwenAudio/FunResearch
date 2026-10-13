@@ -1,4 +1,4 @@
-# HotBias: Hotword Biasing for ASR with Cross-Domain Generalization and Cross-Model Transfer.
+# HotBias: Hotword Biasing for ASR with Cross-Domain Generalization and Cross-Model Transfer
 
 HotBias adds a gated, token-level score to a frozen autoregressive ASR model. Its pretrained biasing core can be reused across ASR backbones by training only six target-specific input projections. This repository provides the core implementation, alignment and inference code for Fun-ASR-Nano-2512 and FireRedASR2-AED, and architecture figures.
 
