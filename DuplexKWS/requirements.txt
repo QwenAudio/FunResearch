@@ -1,0 +1,4 @@
+torch==2.5.1
+torchaudio==2.5.1
+PyYAML==6.0.3
+soundfile==0.14.0
