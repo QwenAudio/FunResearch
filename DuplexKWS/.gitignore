@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+predictions*.jsonl
+.flake8
+.pre-commit-config.yaml
+tests/

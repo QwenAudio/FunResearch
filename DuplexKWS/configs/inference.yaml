@@ -1,0 +1,19 @@
+model:
+  input_dim: 64
+  output_dim: 35
+  hidden_size: 96
+  encoder_layers: 2
+  decoder_layers: 3
+  echo_hidden_dim: 70
+  echo_kernel_size: 5
+  gate_groups: 8
+audio:
+  sample_rate: 16000
+  min_frames: 98
+  fbank:
+    num_mel_bins: 64
+    frame_length: 25
+    frame_shift: 10
+    dither: 0.0
+    energy_floor: 0.0
+    window_type: povey
