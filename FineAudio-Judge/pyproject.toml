@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fineaudio-judge"
+version = "0.1.0"
+description = "Structured audio rubrics, data construction, and FineAudio-Judge inference"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "networkx>=3.2",
+  "numpy>=1.26",
+  "openai>=1.40",
+  "pydantic>=2.7,<3",
+  "PyYAML>=6.0",
+  "soundfile>=0.12",
+  "transformers>=4.57",
+]
+
+[project.optional-dependencies]
+judge = [
+  "ms-swift>=4.0,<5",
+  "peft>=0.13",
+  "torch>=2.4",
+  "vllm==0.19.1",
+  "qwen-omni-utils==0.0.9",
+]
+
+[project.scripts]
+fineaudio-decompose = "judge.cli.decompose_prompt:main"
+fineaudio-infer-batch-rubrics = "judge.cli.infer_batch_rubrics:main"
+fineaudio-infer-single-rubric = "judge.cli.infer_single_rubric:main"
+fineaudio-infer-holistic = "judge.cli.infer_holistic:main"
+fineaudio-reproduce-rubric-qa = "judge.cli.reproduce_rubric_qa:main"
+fineaudio-reproduce-preference = "judge.cli.reproduce_preference:main"
+
+[tool.setuptools.packages.find]
+include = ["rubric_decomposition*", "judge*", "data_pipeline*"]
+
+[tool.setuptools.package-data]
+data_pipeline = ["**/*.json", "**/*.txt", "**/*.md", "**/*.example", "**/*.patch"]
+
+[tool.ruff.lint]
+# Several pipeline scripts intentionally import external checkout modules only
+# after configuring their search path. Compact one-line statements are retained
+# where changing validated orchestration code would add release-only churn.
+ignore = ["E402", "E701", "E702", "E731"]

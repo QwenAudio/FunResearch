@@ -1,0 +1,14 @@
+# Table 1 AAJ/Ours: joint rubric evaluation used for consistency scoring.
+protocol: joint_rubric
+engine: vllm
+tensor_parallel_size: 2
+gpu_memory_utilization: 0.90
+model_batch_size: 4
+max_model_len: 16384
+max_tokens: 4096
+chunk_size: 80
+ordering_backend: qwen
+temperature: 0.0
+seed: 20260919
+guided_json_fallback: true
+scoring: yes_count / valid_rubric_count

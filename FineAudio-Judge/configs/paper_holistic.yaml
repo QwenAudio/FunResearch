@@ -1,0 +1,12 @@
+# Table 1 Holistic: rubric-free independent score for each prompt-audio input.
+protocol: holistic
+engine: transformers
+max_batch_size: 1
+torch_dtype: bfloat16
+attention_implementation: flash_attn
+max_tokens: 32
+temperature: 0.0
+top_p: 1.0
+repetition_penalty: 1.0
+seed: 20260924
+score_range: [0, 100]

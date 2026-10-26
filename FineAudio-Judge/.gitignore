@@ -1,0 +1,25 @@
+# Local outputs and audit artifacts
+outputs/
+work/
+logs/
+*.log
+
+# Python and build products
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv*/
+.pytest_cache/
+.ruff_cache/
+
+# Model artifacts are distributed separately
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+
+# Editor and OS files
+.DS_Store
+.ipynb_checkpoints/

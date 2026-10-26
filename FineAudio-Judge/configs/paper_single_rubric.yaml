@@ -1,0 +1,14 @@
+# Table 2/3: one audio-rubric pair per semantic request.
+protocol: single_rubric
+engine: vllm
+tensor_parallel_size: 2
+gpu_memory_utilization: 0.90
+model_batch_size: 8
+max_model_len: 8192
+max_tokens: 8
+temperature: 0.0
+top_p: 1.0
+top_k: -1
+repetition_penalty: 1.0
+seed: 20260919
+guided_yes_no: true
