@@ -1,0 +1,64 @@
+diff --git a/executor/mixer.py b/executor/mixer.py
+index 6cef15f..aeff91d 100644
+--- a/executor/mixer.py
++++ b/executor/mixer.py
+@@ -41,6 +41,7 @@ DEFAULT_OUTPUT_PEAK_CEILING_DBFS = -1.0
+ DEFAULT_OUTPUT_SUBTYPE = "PCM_24"
+ _OUTPUT_SAFE_PEAK = 1.0 - (1.0 / 32768.0)
+ _OUTPUT_SAFE_PEAK_DBFS = 20.0 * math.log10(_OUTPUT_SAFE_PEAK)
++_OUTPUT_SAFE_PEAK_EPSILON = 1e-5
+ _SUPPORTED_OUTPUT_SAMPLE_WIDTHS = {
+     "PCM_S8": 1,
+     "PCM_U8": 1,
+@@ -700,6 +701,16 @@ def _apply_overflow_strategy(audio: np.ndarray, warning_context: str, *, warn: b
+     normalized_peak = float(np.max(np.abs(normalized))) if normalized.size else 0.0
+     if normalized_peak <= _OUTPUT_SAFE_PEAK:
+         return normalized
++    # ``pyloudnorm`` computes the target in float64 and the mixer stores float32.
++    # The cast can leave the peak one quantization step above the target (for
++    # example 0.999970 vs. 0.999969).  This is not clipping; clamp that numerical
++    # residue instead of dropping the entire source segment from the mix.
++    if normalized_peak <= _OUTPUT_SAFE_PEAK + _OUTPUT_SAFE_PEAK_EPSILON:
++        return np.clip(
++            normalized,
++            -_OUTPUT_SAFE_PEAK,
++            _OUTPUT_SAFE_PEAK,
++        ).astype(np.float32, copy=False)
+     raise RuntimeError(
+         f"{warning_context}; peak normalization did not reduce peak enough "
+         f"(got {normalized_peak:.6f}, target {_OUTPUT_SAFE_PEAK:.6f})"
+diff --git a/music/AceStep.py b/music/AceStep.py
+index c230766..c8f9b8a 100644
+--- a/music/AceStep.py
++++ b/music/AceStep.py
+@@ -16,8 +16,8 @@ class AceStepClient:
+     def __init__(
+         self,
+         server_url: str = "http://127.0.0.1:<AceStep1.5-port>",
+-        demucs_host: str = "127.0.0.1",
+-        demucs_port: int | str = "<Demucs-port>",
++        demucs_host: str | None = None,
++        demucs_port: int | str | None = None,
+         output_dir: str | Path = "output",
+         timeout: float = 600.0,
+     ) -> None:
+diff --git a/song/demucs.py b/song/demucs.py
+index cc6df2d..82edb31 100644
+--- a/song/demucs.py
++++ b/song/demucs.py
+@@ -3,7 +3,14 @@ import time
+ import requests
+
+ class DemucsClient:
+-    def __init__(self, host: str = "127.0.0.1", port: int | str = "<Demucs-port>", timeout: int = 600):
++    def __init__(
++        self,
++        host: str | None = None,
++        port: int | str | None = None,
++        timeout: int = 600,
++    ):
++        host = host or os.getenv("AUDIO_OSCAR_DEMUCS_HOST", "127.0.0.1")
++        port = port or os.getenv("AUDIO_OSCAR_DEMUCS_PORT", "<Demucs-port>")
+         self.base_url = f"http://{host}:{port}"
+         self.endpoint = f"{self.base_url}/separate"
+         self.timeout = timeout

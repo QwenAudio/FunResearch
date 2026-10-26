@@ -1,0 +1,24 @@
+Compare the candidate with the accepted audio-scene prompts.
+
+A candidate is a semantic duplicate when it repeats an accepted prompt's
+acoustic setting together with a substantially overlapping sound inventory,
+or when it repeats the same central activity, sound progression, narrative
+arc, or speech purpose with only surface wording changed. It is not necessary
+for every one of these dimensions to match. For batch diversity, reject another
+coffee-order scene, morning drink-preparation routine, late-night repair scene,
+or similarly templated situation when one is already accepted. Shared isolated
+generic sounds such as footsteps or room tone do not make two otherwise
+distinct scenes duplicates.
+
+Return JSON:
+{
+  "duplicate": false,
+  "matching_ids": [],
+  "reason": "..."
+}
+
+Accepted prompts:
+{accepted_json}
+
+Candidate prompt:
+{candidate_json}

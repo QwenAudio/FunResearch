@@ -1,0 +1,109 @@
+{
+  "recipe": "fineaudio_judge_training_data",
+  "positive_routes": {
+    "route1_real_world": {
+      "target_pairs": 2000,
+      "duration_seconds": [20.0, 60.0],
+      "source_group_cap": 1,
+      "source_collections": 2,
+      "target_per_collection": 1000,
+      "allowed_speech_languages": ["zh", "en", "mixed_zh_en", "none"],
+      "required_gates": [
+        "audio_readable",
+        "language_allowed",
+        "content_safe",
+        "non_speech_evidence_verified",
+        "audio_only_caption",
+        "caption_fact_coverage"
+      ]
+    },
+    "route2_deterministic_composition": {
+      "target_pairs": 2000,
+      "seed": 20260902,
+      "caption_languages": {"zh": 1000, "en": 1000},
+      "speech": {"zh": 800, "en": 800, "none": 400},
+      "continuous_background": 1000,
+      "music": 900,
+      "foreground_overlap_counts": {"0": 600, "1": 1000, "2": 400},
+      "co_onset_pairs": 200,
+      "foreground_group_range": [5, 8],
+      "global_source_reuse_limit": 1,
+      "label_source": "deterministic_scene_graph_and_mix_timeline"
+    },
+    "route3_prompt_generation": {
+      "target_pairs": 2000,
+      "prompt_languages": {"zh": 1000, "en": 1000},
+      "prompt_origin": "model_generated_audio_only_scenes",
+      "prompt_temperature": 0.75,
+      "prompt_top_p": 0.9,
+      "required_prompt_stages": [
+        "generate",
+        "audio_only_rewrite",
+        "semantic_audit",
+        "literal_and_semantic_deduplication",
+        "language_validation"
+      ],
+      "audio_backend": "Audio-Oscar",
+      "audio_oscar_revision": "aca87d722eaa00265023817cf42f29f6a3c1ad75",
+      "planner_temperature": 0.1,
+      "generation_attempts": 3,
+      "audio_critic_threshold": 0.7,
+      "audio_critic_retries": 2,
+      "final_mix_audit": true
+    }
+  },
+  "cross_route_generation": {
+    "seed": 20260906,
+    "route1_prompts": 500,
+    "route2_prompts": 500,
+    "audio_backend": "Audio-Oscar"
+  },
+  "counterfactuals": {
+    "route2": {
+      "total": 2000,
+      "prompt_side": 1000,
+      "audio_side": 1000,
+      "categories": {"event": 500, "attribute": 500, "relation": 500, "all_three": 500},
+      "intended_levels": {"mid": 1000, "low": 1000},
+      "label_source": "deterministic_edit_graph_and_hierarchy_closure"
+    },
+    "route3": {
+      "total": 1000,
+      "prompt_side": 500,
+      "audio_side": 500,
+      "languages": {"zh": 500, "en": 500},
+      "intended_levels": {"mid": 500, "low": 500},
+      "source_reuse_limit": 1,
+      "audio_backend": "Audio-Oscar"
+    },
+    "random_mismatch": {
+      "seed": 20260907,
+      "total": 1200,
+      "cross_route_directions": {
+        "route1_prompt_route2_audio": 100,
+        "route1_prompt_route3_audio": 100,
+        "route2_prompt_route1_audio": 100,
+        "route2_prompt_route3_audio": 100,
+        "route3_prompt_route1_audio": 100,
+        "route3_prompt_route2_audio": 100
+      },
+      "within_route": {"route1": 200, "route2": 200, "route3": 200},
+      "caption_jaccard_ceiling": 0.55,
+      "match_priority": ["language", "speech_presence", "duration_bucket", "duration_ratio"],
+      "donor_reuse": false
+    }
+  },
+  "postprocessing": {
+    "language_alignment_audit": true,
+    "rewrite_only_misaligned_text": true,
+    "relabel_changed_pairs": true,
+    "maximum_audio_seconds": 70.0,
+    "retain_exactly_70_seconds": true,
+    "split_seed": 20260907,
+    "dev_hash_threshold_out_of_10000": 530,
+    "split_unit": "lineage_connected_component",
+    "deduplicate_model_visible_audio_and_questions": true,
+    "drop_conflicting_model_visible_inputs": true,
+    "expand_multi_rubric_rows_to_single_rubric_rows": true
+  }
+}

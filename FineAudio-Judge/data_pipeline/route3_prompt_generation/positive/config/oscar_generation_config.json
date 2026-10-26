@@ -1,0 +1,4 @@
+{
+  "audio_oscar_root": ".",
+  "note": "Set AUDIO_OSCAR_ROOT when running audio generation. This file is recorded only as prompt-run provenance."
+}

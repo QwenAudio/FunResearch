@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "name": "route2_runnable_demo",
+  "description": "Small runnable example for the public Route 2 production method; not an author-training-data manifest.",
+  "seeds": {
+    "asset": 1012,
+    "scene": 1210
+  },
+  "asset_pool": {
+    "effect_count": 96,
+    "ambience_count": 16,
+    "music_count": 16
+  },
+  "speech_pool": {
+    "zh_count": 8,
+    "ears_count": 6,
+    "expresso_count": 2
+  },
+  "negative_pool": {
+    "effect_count": 32,
+    "ambience_count": 8,
+    "music_count": 6,
+    "zh_speech_count": 8,
+    "en_speech_count": 8
+  },
+  "scenes": {
+    "count": 10,
+    "zh_speech_count": 4,
+    "en_speech_count": 4,
+    "zh_no_speech_count": 1,
+    "en_no_speech_count": 1,
+    "overlap_zero_count": 3,
+    "overlap_one_count": 5,
+    "overlap_two_count": 2,
+    "continuous_background_count": 5,
+    "music_count": 6,
+    "co_onset_count": 1,
+    "max_effect_slug_reuse": 1,
+    "max_effect_family_reuse": 4,
+    "foreground_no_background_min": 5,
+    "foreground_no_background_max": 5,
+    "foreground_with_background_min": 4,
+    "foreground_with_background_max": 4,
+    "duration_min": 36,
+    "duration_max": 48
+  },
+  "output": {
+    "id_prefix": "route2_demo"
+  }
+}

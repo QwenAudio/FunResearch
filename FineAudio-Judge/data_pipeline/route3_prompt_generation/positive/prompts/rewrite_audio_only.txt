@@ -1,0 +1,41 @@
+Rewrite the draft as a strictly audio-centered prompt while preserving its
+core audible progression and exact quoted speech.
+
+Every descriptive clause should correspond to audible content that can be
+encoded in the waveform. Express actions through their audible consequences.
+Remove visual-only facts instead of compensating for them with elaborate
+acoustic explanations.
+
+Associate every intelligible quotation naturally with its speaker or role.
+Convert any indirect report of specific spoken content into the exact words the
+speaker should perform in quotation marks; do not replace dialogue with a
+summary of its meaning.
+Natural, compact identity or delivery cues may remain, such as "an elderly man
+says angrily" or "a child whispers." Retain only the few cues that define the
+performance rather than expanding them into a complete voice profile. The
+quoted words already convey their language, so an additional language label is
+unnecessary.
+
+Rewrite fluently without collapsing the audible progression. Preserve all
+substantial sound actions, complete quoted dialogue, sustained elements,
+meaningful pauses, and useful order or overlap. Improve economy by removing
+decorative adjectives, redundant spatial detail, inconsequential micro-actions,
+and repeated wording rather than by shortening the scene's actual audible
+content. Preserve the natural performance space of substantive speech and
+successive actions; do not convert them into token phrases or a rapid cue list.
+Do not turn a simple sound into a chain of timbre, rhythm, distance, and room
+acoustics. Do not add new details merely to make the prose vivid.
+
+Do not introduce estimated numeric event times. Preserve a number only when it
+belongs naturally to the requested content; otherwise use relative ordering or
+overlap. Write one coherent prose description rather than a script or event
+list. Read the completed result clause by clause and remove any remaining fact
+that a listener could not verify from the requested audio.
+
+Return JSON:
+{
+  "prompt": "..."
+}
+
+Draft:
+{draft_json}

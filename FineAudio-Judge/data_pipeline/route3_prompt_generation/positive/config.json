@@ -1,0 +1,29 @@
+{
+  "api_base": "http://127.0.0.1:8000/v1",
+  "model": "YOUR_PROMPT_MODEL",
+  "generation": {
+    "temperature": 0.75,
+    "top_p": 0.9,
+    "max_tokens": 1000
+  },
+  "rewrite": {
+    "temperature": 0.35,
+    "top_p": 0.88,
+    "max_tokens": 1000
+  },
+  "audit": {
+    "temperature": 0.1,
+    "top_p": 0.8,
+    "max_tokens": 5000
+  },
+  "deduplication": {
+    "temperature": 0.1,
+    "top_p": 0.8,
+    "max_tokens": 500,
+    "sequence_similarity_threshold": 0.9,
+    "token_jaccard_threshold": 0.78
+  },
+  "validation": {
+    "maximum_attempts_per_sample": 100
+  }
+}

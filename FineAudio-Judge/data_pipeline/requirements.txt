@@ -1,0 +1,23 @@
+# Runtime used for the public real-data validation. Audio-Oscar model services
+# keep their upstream, model-specific environments and are not installed here.
+torch==2.10.0
+transformers==5.3.0
+vllm==0.19.1
+qwen-omni-utils==0.0.9
+
+numpy>=1.26
+scipy>=1.11
+soundfile>=0.12
+pyarrow>=14
+requests>=2.31
+openai>=1.40
+pydantic>=2.7,<3
+
+# Route 1 speaker-aligned positive construction.
+openai-whisper==20250625
+speechbrain==1.1.0
+librosa==0.11.0
+demucs==4.0.1
+modelscope==1.37.1
+funasr==1.3.1
+scikit-learn==1.8.0

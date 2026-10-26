@@ -1,0 +1,77 @@
+You create natural-language descriptions for complex audio generation.
+
+TASK
+Produce one original audio description that can be passed directly to a
+general audio-generation pipeline. Before writing, silently form and verify a
+coherent acoustic design: decide which audible sources are present, how they
+behave, what intelligible speech is included when appropriate, and how the
+sounds relate and change. Use this internal design only to compose the final
+passage, keeping sources clear and the progression internally consistent.
+
+LANGUAGE FOR THIS SAMPLE
+{target_language_instruction}
+
+WAVEFORM GROUNDING
+Every detail in the final passage should correspond to an identifiable sound,
+vocal performance, musical element, silence, or audible relationship in the
+requested waveform. Establish context through the sounds themselves. Name a
+source or action when it clarifies the sound to be generated, while leaving
+out facts that have no acoustic realization.
+
+SPEECH
+Let the acoustic concept determine the natural presence and prominence of
+speech alongside its other sounds. Treat intelligible speech as a normal part
+of the design rather than an exceptional case, while still allowing a scene to
+remain nonverbal when that is the most coherent choice. For intelligible
+speech, write the exact spoken words in quotation marks, associate them with a
+speaker or role, and include only salient delivery characteristics. Let spoken
+content develop as a substantive passage or natural exchange when the scene is
+speech-bearing; isolated token phrases should be used only when the acoustic
+moment genuinely calls for them. Whenever the description specifies what a
+speaker says, asks, explains, announces, or replies, express that content as
+direct quoted speech rather than an indirect report. Human activity may also be
+conveyed through nonverbal vocalizations and sound-producing actions.
+
+CONTROL AND TEMPORAL COMPOSITION
+Specify controls that materially affect the audio and can be realized
+reliably: recognizable sound actions, salient vocal delivery, music style,
+continuity, sequence, interruption, overlap, and meaningful change. Organize
+them as a connected audible progression without assigning sources to stereo
+positions. Express timing through natural relative language, allowing the
+pipeline to plan exact durations and event boundaries. Give the progression
+enough temporal substance through actual sound-bearing actions, complete
+spoken content, sustained sounds, pauses, and changes. Length should come from
+what can be heard unfolding, rather than from added adjectives or explanatory
+prose. Successive actions should have believable room to occur at a natural
+pace instead of reading as a compressed list of nearly instantaneous cues.
+
+WRITING
+Write one fluent, fully developed paragraph that can unfold as an extended
+audio scene. Begin from audible content or acoustic action, using sentence
+structure suited to the particular design. Each sentence should add a
+generatable sound, spoken passage, meaningful pause, or useful relationship
+among sounds. Use direct, ordinary acoustic language, reserving technical
+recording and mixing terminology for cases where it defines an essential
+result. Give continuing actions and spoken exchanges enough content to be
+performed rather than merely named. The passage should read as a natural audio
+description rather than a visual description, story synopsis, or explanation
+of inferred events.
+
+BATCH DIVERSITY
+Use the accepted prompts below as context for semantic novelty. Create a new
+coherent acoustic concept with different principal sound sources, progression,
+and overall composition. Across the batch, keep intelligible speech well
+represented without forcing it into every scene or fixing a ratio, speaker
+count, dialogue length, or scene category. Vary the balance among speech,
+ambience, music, and sound effects according to each design. The accepted
+prompts indicate what has already been covered; they do not define a scene
+taxonomy.
+
+OUTPUT
+Return one valid JSON object with exactly this structure:
+{
+  "prompt": "..."
+}
+
+Accepted prompts in the current batch (possibly empty):
+{accepted_json}

@@ -1,0 +1,90 @@
+{
+  "pipeline_name": "route1_unified_audio_grounded",
+  "protocol": "audio_grounded",
+  "datasets": ["vript", "finevideo"],
+  "selection": {
+    "duration_seconds": {"min": 20.0, "max": 60.0},
+    "native_clip_only": true,
+    "allowed_speech_languages": ["zh", "en", "mixed_zh_en"],
+    "allow_no_speech": true,
+    "reject_profanity": true,
+    "reject_corrupted_audio": true,
+    "reject_corrupted_or_repetitive_asr": true,
+    "speech_min_non_speech_event_types": 1,
+    "no_speech_min_non_speech_event_types": 2,
+    "verified_event_min_confidence": 0.85,
+    "verified_event_allowed_prominence": [
+      "clear_foreground",
+      "clear_background"
+    ],
+    "reject_pure_or_near_pure_speech": true,
+    "reject_indistinguishable_static_noise": true,
+    "independent_sound_verification": true,
+    "require_screening_pass": true,
+    "source_caps_in_order": [1, 2, 3],
+    "buffer_per_dataset": 1300,
+    "target_per_dataset": 1000,
+    "keep_source_group_in_same_split": true
+  },
+  "language_gate": {
+    "whisper_model": "large-v3-turbo",
+    "voxlingua_model": "speechbrain/lang-id-voxlingua107-ecapa",
+    "allowed_languages": ["zh", "en"],
+    "whisper_min_avg_logprob": -1.0,
+    "whisper_max_no_speech_probability": 0.6,
+    "voxlingua_min_probability": 0.7,
+    "voxlingua_mode": "audit",
+    "min_window_seconds": 0.5
+  },
+  "generation": {
+    "omni_model": "",
+    "text_model": "",
+    "temperature": 0.0,
+    "seed": 1234,
+    "omni_tensor_parallel": 2,
+    "text_tensor_parallel": 2,
+    "speaker_alignment_max_model_len": 65536
+  },
+  "caption_gates": {
+    "require_every_coverage_check": false,
+    "reject_reported_omissions": false,
+    "require_all_dialogue_spans_in_both_languages": false
+  },
+  "caption_language": {
+    "follow_detected_speech_language": true,
+    "no_speech_default": "en",
+    "production_field": "audio_caption",
+    "audit_translation_field": "audit_caption_zh"
+  },
+  "speaker_alignment": {
+    "enabled": true,
+    "datasets": ["vript", "finevideo"],
+    "only_samples_with_reliable_speech": true,
+    "whisper_word_model": "large-v3-turbo",
+    "demucs_model": "htdemucs",
+    "speaker_embedding_model": "iic/speech_ecapa-tdnn_sv_en_voxceleb_16k",
+    "min_utterance_seconds": 0.35,
+    "min_word_probability": 0.25,
+    "caption_turn_min_confidence": 0.6,
+    "require_all_selected_quotes_verbatim": false,
+    "caption_update_mode": "bounded_exact_substring_patch",
+    "fallback_to_base_on_invalid_patch": true,
+    "max_speakers": 6,
+    "caption_source": "original_mixed_wav",
+    "video_use": "speaker_ownership_adjudication_only",
+    "publication": "single_final_manifest"
+  },
+  "executables": {
+    "default_python": "python",
+    "language_python": "python",
+    "omni_python": "python",
+    "text_python": "python",
+    "speaker_python": "python",
+    "demucs_python": "python"
+  },
+  "publication": {
+    "final": "combined/audio_caption_pairs.jsonl",
+    "speaker_alignment_policy": "use_valid_patch_else_base",
+    "single_release_manifest": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "protocol": "audio_grounded",
+  "stages": [
+    {"id": "ingest", "outputs": ["data/<dataset>/source_manifest.jsonl", "data/<dataset>/audios/", "data/<dataset>/videos/"]},
+    {"id": "preflight", "outputs": ["reports/preflight.json"]},
+    {"id": "language", "outputs": ["outputs/<dataset>_whisper.jsonl", "outputs/<dataset>_language_gate.jsonl"], "resume_key": "id"},
+    {"id": "screen", "outputs": ["outputs/<dataset>_screening.jsonl"], "resume_key": "id"},
+    {"id": "verify", "outputs": ["outputs/<dataset>_sound_verification.jsonl"], "resume_key": "id"},
+    {"id": "select", "outputs": ["data/<dataset>/selected_manifest.jsonl", "outputs/<dataset>_selection_audit.jsonl"]},
+    {"id": "detective", "outputs": ["outputs/<dataset>_audio_analysis.jsonl"], "resume_key": "id"},
+    {"id": "finalize", "outputs": ["<dataset>/caption_candidates.jsonl", "<dataset>/rejected.jsonl"], "resume_key": "id"},
+    {"id": "speaker_align", "optional": false, "default": true, "disable_flag": "--without-speaker-align", "outputs": ["outputs/<dataset>_speaker_inventory.jsonl", "outputs/<dataset>_speaker_words.jsonl", "outputs/demucs_vocals/<dataset>/", "outputs/<dataset>_speaker_clusters.jsonl", "<dataset>/speaker_aligned_candidates.jsonl"], "resume_key": "id"},
+    {"id": "publish", "outputs": ["combined/audio_caption_pairs.jsonl", "reports/publish_summary.json"]}
+  ]
+}

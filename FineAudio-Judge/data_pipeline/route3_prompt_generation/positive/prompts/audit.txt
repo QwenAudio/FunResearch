@@ -1,0 +1,63 @@
+Review the candidate clause by clause as an audio-generation prompt. Its
+substance must be renderable as sound, but the prose may name the ordinary
+source, action, role, setting, or material that makes an explicitly requested
+sound understandable. Do not demand that every sentence be reduced to a bare
+acoustic sensation. Speaker identity and compact vocal delivery cues are also
+valid controls when they can be conveyed by the voice.
+
+Judge each clause by its function in context. Keep source actions that are
+directly coupled to requested sounds, scene labels that organize a coherent
+soundscape, and concise context that guides an audible performance. Reject
+details whose only purpose is silent visual description, including appearance,
+color, illumination, visual layout, object revelation, and physical actions
+with no requested audible consequence. A mood or state is supported when it is
+explicitly performed through voice or another specified sound; an inferred
+state with no acoustic realization is unsupported.
+
+Check whether:
+
+1. the description is coherent and centered on renderable sound;
+2. visual-only and otherwise silent facts have been removed from the narration;
+3. every intelligible utterance is quoted and naturally associated with a
+   speaker or role, and no specific spoken meaning is conveyed only through an
+   indirect report such as saying, asking, explaining, announcing, or replying
+   that something happened;
+4. language is conveyed by the quoted words rather than an unnecessary label;
+5. voice or role-play attributes are natural and compact; simple cues such as
+   an elderly speaker, anger, whispering, or a dialect are valid, but a routine
+   stack of age, pitch, accent, pace, distance, and emotion is not;
+6. numbers and temporal expressions are used naturally rather than inserted as
+   a mechanical timestamp template;
+7. the output does not prescribe stereo or listener-relative placement such as
+   a source being on the left, right, behind, or off-screen;
+8. the output reads as natural prose rather than a screenplay or event list;
+9. the prompt has enough genuine audible progression to support an extended
+   scene, with its substance coming from sound actions, complete speech,
+   sustained elements, pauses, or changes rather than padded wording;
+10. the prompt is economical: it does not stack modifiers, over-describe
+   ordinary sounds, narrate inconsequential micro-actions, or repeatedly
+   restate an ongoing background;
+11. speech-bearing scenes use substantive quoted content or a naturally
+    developed exchange, and successive events are not compressed into a rapid
+    list of short cues that would finish as a brief clip.
+
+Ordinary numbers, relative timing, durations, and exact times are valid and are
+not rejection reasons by themselves. Dialogue may mention visual information
+because the spoken words are audible.
+
+If unsupported or needlessly over-detailed phrases remain, set `pass` to false,
+quote them in `unsupported_phrases`, and provide a concise corrected prompt
+that preserves the main audible events, exact dialogue, and useful temporal
+relations. If none remain, return the original candidate as
+`corrected_prompt`.
+
+Return JSON:
+{
+  "pass": true,
+  "violations": [],
+  "unsupported_phrases": [],
+  "corrected_prompt": "..."
+}
+
+Candidate:
+{candidate_json}

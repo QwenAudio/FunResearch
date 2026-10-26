@@ -1,0 +1,45 @@
+Rewrite the candidate from the perspective of what a listener can verify in
+the requested waveform. Preserve the scene's audible progression and every
+exact quotation.
+
+Write the final prompt in the same language as the candidate. Do not translate
+the narration or quoted speech into another language.
+
+Retain the main audible events, exact quotations, and useful temporal
+relationships. Remove silent appearance, illumination, gaze, pose, visual
+outcome, and other facts that are not encoded in the waveform. Delete
+unsupported visual staging rather than replacing it with extra direction,
+distance, material, or reverberation detail.
+
+Whenever the candidate specifies the semantic content of something a speaker
+says, asks, explains, announces, or replies, preserve or express that content as
+direct quoted speech associated with the speaker. Do not turn it into an
+indirect summary.
+
+Describe the sources without prescribing stereo or listener-relative placement.
+Remove phrases such as a source being on the left, right, behind the listener,
+or off-screen while preserving the sound itself.
+
+Make the final prompt direct without shortening its actual audible progression.
+Preserve substantive quoted dialogue, successive sound actions, sustained
+elements, meaningful pauses, and changes that give the scene natural
+performance time. Remove stacked adjectives, decorative setup, redundant
+acoustic attributes, inconsequential micro-actions, and repeated wording about
+an ongoing sound. A compact cue such as "an elderly man says angrily" is valid;
+do not expand it into a full voice profile. Do not add content while rewriting.
+
+The final wording itself must stay listener-facing. It should not mention that
+a visual phrase was replaced or refer to a camera, screen, frame, beam, image,
+or drawing result.
+
+Do not introduce estimated numeric event times. Preserve a number only when it
+belongs naturally to the requested content; otherwise retain relative order or
+overlap. Return one coherent audio-generation prompt in natural prose.
+
+Return JSON:
+{
+  "prompt": "..."
+}
+
+Candidate:
+{candidate_json}
