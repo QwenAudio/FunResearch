@@ -15,8 +15,8 @@ Recent advances in instruction-guided audio generation make fine-grained evaluat
 |---|---|
 | Paper | --- |
 | Code | [GitHub](https://github.com/QwenAudio/FunResearch/tree/main/FineAudio-Judge) |
-| Model | --- |
-| Benchmark | --- |
+| Model | [HuggingFace](https://huggingface.co/Zixchen/FineAudio-Judge) |
+| Benchmark | [Benchmark](https://huggingface.co/datasets/Zixchen/FineAudio-Judge-Benchmark) |
 
 ## Overview
 
