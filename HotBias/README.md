@@ -34,13 +34,13 @@ Use a separate environment compatible with each upstream ASR model. For Nano, ob
 
 The three HotBias checkpoints are separate from the ASR models:
 
-| Checkpoint | Use | Hugging Face link |
+| Checkpoint | Use | Link |
 | --- | --- | --- |
-| `source_transfer.pt` | Final Qwen3-based source core; initializes new target adapters. It is **not** a standalone ASR model. | |
-| `nano_aligned.pt` | Completed Fun-ASR-Nano-2512 adapter from the 100-hour selected alignment run. | |
-| `firered_aligned.pt` | Completed FireRedASR2-AED adapter. | |
+| `source_transfer.pt` | Final Qwen3-based source core; initializes new target adapters. It is **not** a standalone ASR model. | [<img src="https://g.alicdn.com/sail-web/maas/2.13.172/favicon/128.ico" alt="ModelScope" width="18" height="18"> ModelScope](https://www.modelscope.cn/models/coming245/HotBias/resolve/master/source_transfer.pt)<br><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" width="18" height="18"> Hugging Face |
+| `nano_aligned.pt` | Completed Fun-ASR-Nano-2512 adapter from the 100-hour selected alignment run. | [<img src="https://g.alicdn.com/sail-web/maas/2.13.172/favicon/128.ico" alt="ModelScope" width="18" height="18"> ModelScope](https://www.modelscope.cn/models/coming245/HotBias/resolve/master/nano_aligned.pt)<br><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" width="18" height="18"> Hugging Face |
+| `firered_aligned.pt` | Completed FireRedASR2-AED adapter. | [<img src="https://g.alicdn.com/sail-web/maas/2.13.172/favicon/128.ico" alt="ModelScope" width="18" height="18"> ModelScope](https://www.modelscope.cn/models/coming245/HotBias/resolve/master/firered_aligned.pt)<br><img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" width="18" height="18"> Hugging Face |
 
-Model files are not stored in this Git repository; Hugging Face links will be added to the table when available. Their SHA256 values and export procedure are in [Checkpoint details](docs/checkpoints.md). Users with the three original checkpoints can run [`prepare_release_weights.py`](scripts/prepare_release_weights.py) with an external `--output-dir` to create the model-only files. The paths below are placeholders for that external checkpoint directory.
+Model files are hosted on [ModelScope](https://www.modelscope.cn/models/coming245/HotBias), with direct downloads in the table above. Hugging Face links are pending. Their SHA256 values and export procedure are in [Checkpoint details](docs/checkpoints.md). Users with the three original checkpoints can run [`prepare_release_weights.py`](scripts/prepare_release_weights.py) with an external `--output-dir` to create the model-only files. The paths below are placeholders for an external checkpoint directory.
 
 ## Inference
 
@@ -121,7 +121,7 @@ The initialization files are **not** inference checkpoints. Completed training w
 
 ## Reproduction status
 
-The code and separately distributed checkpoints support the **transfer method**, but this repository does not yet provide public checkpoint links, the original ASR backbones, or evaluation audio/manifests. The frozen source Qwen3-based recognizer is not included. Differences between the reported setup and the checkpoint settings are listed in [Reproduction notes](docs/reproduction.md). Do not treat the quick-start commands as an exact reproduction of reported results.
+The code and separately distributed checkpoints support the **transfer method**. Checkpoint downloads are available on ModelScope; the original ASR backbones and evaluation audio/manifests are not bundled here. The frozen source Qwen3-based recognizer is not included. Differences between the reported setup and the checkpoint settings are listed in [Reproduction notes](docs/reproduction.md). Do not treat the quick-start commands as an exact reproduction of reported results.
 
 Run the backbone-independent checks with:
 
